@@ -62,14 +62,16 @@ public class BST {
 
 
     public void delete(int item) {
-        if (this.isEmpty()) {}
+        if (this.isEmpty()) {
+            return;
+        }
         else if (this.root == item) {
             this.deleteRoot();
         }
-        else if (item < this.root) {
+        else if (item < this.root && this.left != null) {
             this.left.delete(item);
         }
-        else {
+        else if (item > this.root && this.right != null){
             this.right.delete(item);
         }
     }
@@ -81,16 +83,16 @@ public class BST {
             this.right = null;
         }
         else if (this.left.isEmpty()) {
-            BST right = this.right;
-            this.root = right.root;
-            this.left = right.left;
-            this.right = right.right;
+            BST right_tree = this.right;
+            this.root = right_tree.root;
+            this.left = right_tree.left;
+            this.right = right_tree.right;
         }
         else if (this.right.isEmpty()) {
-            BST left = this.left;
-            this.root = left.root;
-            this.left = left.left;
-            this.right = left.right;
+            BST left_tree = this.left;
+            this.root = left_tree.root;
+            this.left = left_tree.left;
+            this.right = left_tree.right;
         }
         else {
             this.root = this.left.extractMax();
