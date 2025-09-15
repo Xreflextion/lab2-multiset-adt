@@ -18,6 +18,7 @@ public class LinkedListMultiSet extends MultiSet {
 
 
     public void add(int item) {
+        // Add a node to the front of the linked list
         Node newNode =  new Node(item);
         newNode.next = front;
         front = newNode;
@@ -25,23 +26,51 @@ public class LinkedListMultiSet extends MultiSet {
     }
 
     public void remove(int item) {
-
+        Node prev = null;
+        Node curr = front;
+        while (curr != null) {
+            if (curr.item == item) {
+                if (prev != null) {
+                    prev.next = curr.next;
+                } else {
+                    front = curr.next;
+                }
+                size -= 1;
+            }
+            prev = curr;
+            curr = curr.next;
+        }
     }
 
     public boolean contains(int item) {
+        Node curr = front;
+        while (curr != null) {
+            if (curr.item == item) {
+                return true;
+            }
+            curr = curr.next;
+        }
         return false;
     }
 
     public boolean isEmpty() {
-        return false;
+        return front == null;
     }
 
 
     public int count(int item) {
-        return -1;
+        int count = 0;
+        Node curr = front;
+        while (curr != null) {
+            if (curr.item == item) {
+                count ++;
+            }
+            curr = curr.next;
+        }
+        return count;
     }
 
     public int size() {
-        return -1;
+        return size;
     }
 }
