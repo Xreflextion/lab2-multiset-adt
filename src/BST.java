@@ -99,7 +99,6 @@ public class BST {
         }
     }
 
-
     private int extractMax() {
         if (this.right.isEmpty()){
             int max_item = this.root;
